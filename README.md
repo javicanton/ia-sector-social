@@ -4,6 +4,8 @@
 
 Materiales completos de la intervención de [Javier Cantón](https://javiercanton.com) en el Foro UNIR sobre inteligencia artificial en el sector social. Todo lo que se ve en el taller está aquí: las plantillas, los prompts exactos de las demos y las conversaciones reales con sus resultados.
 
+**Se lee mejor en la web: [javicanton.github.io/ia-sector-social](https://javicanton.github.io/ia-sector-social/)** — con los prompts copiables de uno en uno, la presentación embebida y el dataset navegable.
+
 > **La IA no hace intervención social. Te devuelve las horas para hacerla.**
 
 Dirigido a ONG, fundaciones, administraciones y entidades sociales. Perfil práctico: no hace falta saber nada técnico.
@@ -44,7 +46,7 @@ El detalle de cada caso, con los documentos de partida y lo que hay que buscar e
 
 ## La fórmula
 
-Los diecisiete prompts de este repositorio están construidos con las mismas seis piezas:
+Los dieciséis prompts de este repositorio están construidos con las mismas seis piezas:
 
 1. **Rol** — desde qué oficio quieres que te responda.
 2. **Contexto** — quiénes sois, con quién trabajáis, en qué territorio y con qué medios.
@@ -72,7 +74,7 @@ La sexta es la que marca la diferencia. Sin tu material, la respuesta es genéri
 ```
 kit-de-prompts.md      Diez plantillas por bloques: financiación, análisis,
                        materiales y comunicación, gestión interna.
-guion-de-demos.md      Los siete prompts de las demos, con el desglose de
+guion-de-demos.md      Los seis prompts de las demos, con el desglose de
                        por qué cada uno está escrito así y dónde suele fallar.
 presentacion.md        Las doce diapositivas en texto, legibles y buscables.
 casos/                 Los tres casos con enlace a la conversación completa.

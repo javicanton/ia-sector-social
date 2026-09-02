@@ -1,0 +1,943 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Cómo usar la IA para el sector social</title>
+<meta name="description" content="Kit de diez prompts, tres casos reales y materiales para entidades sociales. Javier Cantón, Foro UNIR.">
+<meta property="og:title" content="Cómo usar la IA para el sector social">
+<meta property="og:description" content="Diez prompts listos para usar, tres casos reales y los materiales completos del taller.">
+<meta property="og:type" content="website">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Newsreader:opsz,wght@6..72,400;6..72,600&family=IBM+Plex+Sans:wght@400;600&family=IBM+Plex+Mono&display=swap" rel="stylesheet">
+<style>
+:root{
+  --deep:#0F4C5C; --teal:#2A7F8E; --ember:#E36414;
+  --tint:#EAF2F3; --ink:#16272C; --mute:#63767B;
+  --paper:#FBFCFC; --line:#D6E2E5;
+  --serif:"Newsreader",Georgia,serif;
+  --sans:"IBM Plex Sans",system-ui,-apple-system,sans-serif;
+  --mono:"IBM Plex Mono",ui-monospace,Menlo,Consolas,monospace;
+}
+*{box-sizing:border-box}
+html{scroll-behavior:smooth;scroll-padding-top:1.5rem}
+@media (prefers-reduced-motion:reduce){html{scroll-behavior:auto}*{transition:none!important}}
+body{margin:0;background:var(--paper);color:var(--ink);font:400 17px/1.6 var(--sans);-webkit-font-smoothing:antialiased}
+a{color:var(--teal);text-underline-offset:3px;text-decoration-thickness:1px}
+a:hover{color:var(--deep)}
+:focus-visible{outline:2.5px solid var(--ember);outline-offset:3px;border-radius:2px}
+h1,h2,h3{font-family:var(--serif);font-weight:600;line-height:1.15;margin:0}
+p{margin:0 0 1rem}
+p:last-child{margin-bottom:0}
+
+/* ---------- hero ---------- */
+.hero{background:var(--deep);color:#fff;padding:clamp(3rem,9vw,6rem) 1.5rem clamp(2.5rem,6vw,4rem)}
+.hero-in{max-width:1140px;margin:0 auto}
+.hero .kicker{font-size:.86rem;color:#9FC5CD;margin:0 0 1.75rem;letter-spacing:.02em}
+.hero h1{font-size:clamp(2.3rem,6.2vw,4.1rem);max-width:16ch;color:#fff;letter-spacing:-.015em}
+.hero .thesis{font-family:var(--serif);font-size:clamp(1.15rem,2.4vw,1.5rem);line-height:1.4;color:#CFE3E7;max-width:34ch;margin:1.5rem 0 0;border-left:3px solid var(--ember);padding-left:1.1rem}
+.hero .meta{color:#9FC5CD;font-size:.94rem;margin:1.75rem 0 0}
+.actions{display:flex;flex-wrap:wrap;gap:.7rem;margin-top:2.25rem}
+.btn{display:inline-block;padding:.72rem 1.25rem;border-radius:3px;font-weight:600;font-size:.96rem;text-decoration:none;border:1.5px solid transparent}
+.btn-solid{background:var(--ember);color:#fff}
+.btn-solid:hover{background:#c8560f;color:#fff}
+.btn-ghost{border-color:#4E8592;color:#DCECEF}
+.btn-ghost:hover{border-color:#CFE3E7;color:#fff;background:rgba(255,255,255,.06)}
+
+/* ---------- shell ---------- */
+.shell{max-width:1140px;margin:0 auto;padding:0 1.5rem;display:grid;grid-template-columns:210px 1fr;gap:3.5rem;align-items:start}
+.rail{position:sticky;top:1.5rem;padding:3rem 0 2rem;font-size:.93rem}
+.rail p{font-family:var(--serif);font-size:1rem;color:var(--deep);margin:0 0 .8rem}
+.rail ol{list-style:none;margin:0;padding:0;border-left:1px solid var(--line)}
+.rail li a{display:block;padding:.36rem 0 .36rem .85rem;margin-left:-1px;border-left:2px solid transparent;color:var(--mute);text-decoration:none}
+.rail li a:hover{color:var(--deep)}
+.rail li a[aria-current="true"]{color:var(--deep);font-weight:600;border-left-color:var(--ember)}
+main{padding:3rem 0 1rem;min-width:0}
+section{padding-bottom:3.75rem}
+section>h2{font-size:clamp(1.7rem,3.4vw,2.3rem);color:var(--deep);margin-bottom:.7rem;letter-spacing:-.01em}
+.lede{max-width:64ch;color:#2C4048;margin-bottom:1.75rem}
+.prose{max-width:64ch}
+hr.rule{border:0;border-top:1px solid var(--line);margin:0 0 3rem}
+
+/* ---------- mapa ---------- */
+.families{display:grid;grid-template-columns:repeat(4,1fr);gap:1px;background:var(--line);border:1px solid var(--line)}
+@media (max-width:1050px){.families{grid-template-columns:repeat(2,1fr)}}
+@media (max-width:420px){.families{grid-template-columns:1fr}}
+.family{background:var(--paper);padding:1.4rem}
+.family h3{font-size:1.12rem;color:var(--deep);margin-bottom:.35rem}
+.family p{font-size:.95rem;color:var(--mute)}
+.aside{font-family:var(--serif);font-size:1.1rem;color:var(--ember);margin-top:1.5rem;max-width:52ch}
+
+/* ---------- casos ---------- */
+.caso{border-top:2px solid var(--deep);padding-top:1.4rem;margin-bottom:2.75rem}
+.caso .tag{font-size:.78rem;font-weight:600;letter-spacing:.09em;color:var(--ember);text-transform:uppercase;display:block;margin-bottom:.5rem}
+.caso h3{font-size:1.5rem;color:var(--deep);margin-bottom:.65rem}
+.caso .body{max-width:64ch}
+.steps{display:flex;flex-wrap:wrap;gap:.5rem;margin:1.1rem 0;padding:0;list-style:none;counter-reset:s}
+.steps li{counter-increment:s;background:var(--tint);padding:.6rem .9rem;font-size:.9rem;flex:1 1 150px;border-top:2px solid var(--teal)}
+.steps li::before{content:counter(s);display:block;font-family:var(--mono);font-size:.78rem;color:var(--teal);margin-bottom:.2rem}
+.links{display:flex;flex-wrap:wrap;gap:.4rem 1.4rem;font-size:.94rem;margin-top:1rem}
+.pull{border-left:3px solid var(--ember);padding:.15rem 0 .15rem 1rem;margin:1.1rem 0;max-width:60ch;color:#2C4048}
+.pull strong{color:var(--deep)}
+
+/* ---------- fórmula ---------- */
+.pieces{list-style:none;margin:0;padding:0;counter-reset:p;display:grid;grid-template-columns:repeat(auto-fit,minmax(250px,1fr));gap:1.5rem 2rem}
+.pieces li{counter-increment:p;padding-left:2.4rem;position:relative}
+.pieces li::before{content:counter(p);position:absolute;left:0;top:-.15rem;font-family:var(--serif);font-size:1.6rem;color:var(--teal)}
+.pieces h3{font-size:1.05rem;color:var(--deep);margin-bottom:.2rem}
+.pieces p{font-size:.94rem;color:var(--mute)}
+
+/* ---------- prompt ---------- */
+.bloque{font-family:var(--serif);font-size:1.28rem;color:var(--deep);margin:2.75rem 0 1.25rem;padding-bottom:.5rem;border-bottom:1px solid var(--line)}
+.bloque:first-of-type{margin-top:1.5rem}
+.prompt{margin:0 0 2.25rem;border:1px solid var(--line);border-left:4px solid var(--deep);background:#fff}
+.prompt-head{display:flex;justify-content:space-between;align-items:flex-start;gap:1rem;padding:1rem 1.1rem .85rem;border-bottom:1px solid var(--line)}
+.prompt-head h3{font-size:1.1rem;color:var(--deep);margin-bottom:.25rem}
+.prompt-head .when{font-size:.9rem;color:var(--mute);margin:0}
+.num{font-family:var(--mono);font-size:.82rem;color:var(--teal);display:block;margin-bottom:.3rem}
+.copy{flex:0 0 auto;font:600 .84rem/1 var(--sans);color:var(--deep);background:var(--tint);border:1px solid var(--line);border-radius:3px;padding:.5rem .8rem;cursor:pointer;transition:background .12s,color .12s}
+.copy:hover{background:var(--deep);color:#fff;border-color:var(--deep)}
+.copy[data-done="1"]{background:var(--deep);color:#fff;border-color:var(--deep)}
+.prompt pre{margin:0;padding:1.1rem;font:400 14px/1.62 var(--mono);white-space:pre-wrap;word-wrap:break-word;overflow-x:auto;color:#1B3238;background:#fff}
+.tip{background:var(--tint);padding:.8rem 1.1rem;font-size:.92rem;color:#2C4048;border-top:1px solid var(--line)}
+.tip b{color:var(--deep)}
+details{border-top:1px solid var(--line)}
+details>summary{cursor:pointer;padding:.7rem 1.1rem;font-size:.9rem;font-weight:600;color:var(--teal);list-style:none}
+details>summary::-webkit-details-marker{display:none}
+details>summary::before{content:"+ ";font-family:var(--mono)}
+details[open]>summary::before{content:"– "}
+details>summary:hover{color:var(--deep)}
+.det-body{padding:0 1.1rem 1.1rem;font-size:.94rem;max-width:66ch}
+.det-body ul{padding-left:1.1rem;margin:0 0 .8rem}
+.det-body li{margin-bottom:.4rem}
+
+/* ---------- datos ---------- */
+.tablewrap{border:1px solid var(--line);max-height:430px;overflow:auto;background:#fff}
+table{border-collapse:collapse;width:100%;font-size:.88rem}
+th{position:sticky;top:0;background:var(--deep);color:#fff;text-align:left;font-weight:600;padding:.55rem .7rem;font-size:.82rem;white-space:nowrap}
+td{padding:.5rem .7rem;border-bottom:1px solid var(--tint);vertical-align:top}
+td:first-child{font-family:var(--mono);font-size:.8rem;color:var(--mute)}
+tr:hover td{background:var(--tint)}
+.tablebar{display:flex;flex-wrap:wrap;gap:.75rem 1.4rem;align-items:center;margin-top:.8rem;font-size:.92rem;color:var(--mute)}
+.tablebar button{font:600 .88rem var(--sans);color:var(--deep);background:none;border:1px solid var(--line);border-radius:3px;padding:.4rem .75rem;cursor:pointer}
+.tablebar button:hover{background:var(--tint)}
+
+/* ---------- pdf ---------- */
+.pdfbox{border:1px solid var(--line);background:var(--tint)}
+.pdfbox iframe{display:block;width:100%;height:min(72vh,620px);border:0}
+.nopdf{display:none;padding:1.6rem}
+@media (max-width:760px){.pdfbox iframe{display:none}.nopdf{display:block}}
+
+/* ---------- ética ---------- */
+.lines{display:grid;gap:1px;background:var(--line);border:1px solid var(--line)}
+.line{background:#fff;padding:1.2rem 1.3rem}
+.line h3{font-size:1.08rem;color:var(--deep);margin-bottom:.3rem}
+.line p{font-size:.95rem;color:#2C4048;max-width:70ch}
+
+/* ---------- descargas ---------- */
+.files{list-style:none;margin:0;padding:0;border-top:1px solid var(--line)}
+.files li{border-bottom:1px solid var(--line);padding:.95rem .2rem;display:flex;flex-wrap:wrap;gap:.3rem 1rem;align-items:baseline}
+.files .name{font-weight:600;flex:0 0 auto}
+.files .desc{color:var(--mute);font-size:.93rem;flex:1 1 240px}
+.ext{font-family:var(--mono);font-size:.75rem;color:var(--teal);border:1px solid var(--line);padding:.1rem .4rem;border-radius:2px}
+
+/* ---------- footer ---------- */
+footer{background:var(--deep);color:#CFE3E7;margin-top:2rem;padding:3rem 1.5rem}
+.foot-in{max-width:1140px;margin:0 auto;display:grid;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));gap:2rem}
+footer h2{font-size:1.25rem;color:#fff;margin-bottom:.5rem}
+footer p{font-size:.94rem;max-width:46ch}
+footer a{color:#fff}
+
+@media (max-width:900px){
+  .shell{grid-template-columns:1fr;gap:0}
+  .rail{position:static;padding:2rem 0 0;border-bottom:1px solid var(--line)}
+  .rail ol{display:flex;flex-wrap:wrap;gap:.2rem .4rem;border-left:0;padding-bottom:1.25rem}
+  .rail li a{border-left:0;border-bottom:2px solid transparent;padding:.3rem .5rem}
+  .rail li a[aria-current="true"]{border-left-color:transparent;border-bottom-color:var(--ember)}
+  main{padding-top:2rem}
+  .prompt-head{flex-direction:column}
+  .prompt pre{font-size:13px;padding:.9rem}
+}
+</style>
+</head>
+<body>
+
+<header class="hero">
+  <div class="hero-in">
+    <p class="kicker">Foro UNIR · Javier Cantón</p>
+    <h1>Cómo usar la IA para el sector social</h1>
+    <p class="thesis">La IA no hace intervención social. Te devuelve las horas para hacerla.</p>
+    <p class="meta">Diez prompts listos para copiar, tres casos reales y los materiales completos del taller. Para ONG, fundaciones y entidades sociales. No hace falta saber nada técnico.</p>
+    <div class="actions">
+      <a class="btn btn-solid" href="#kit">Ir al kit de prompts</a>
+      <a class="btn btn-ghost" href="#casos">Ver los tres casos</a>
+      <a class="btn btn-ghost" href="https://github.com/javicanton/ia-sector-social">Repositorio en GitHub</a>
+    </div>
+  </div>
+</header>
+
+<div class="shell">
+  <nav class="rail" aria-label="Secciones">
+    <p>En esta página</p>
+    <ol>
+      <li><a href="#mapa">Dónde ayuda</a></li>
+      <li><a href="#casos">Los tres casos</a></li>
+      <li><a href="#formula">La fórmula</a></li>
+      <li><a href="#kit">Kit de prompts</a></li>
+      <li><a href="#demos">Guión de demos</a></li>
+      <li><a href="#datos">Los datos</a></li>
+      <li><a href="#presentacion">La presentación</a></li>
+      <li><a href="#etica">Tres líneas</a></li>
+      <li><a href="#descargas">Descargas</a></li>
+    </ol>
+  </nav>
+
+  <main>
+
+  <section id="mapa">
+    <h2>Dónde ayuda de verdad</h2>
+    <p class="lede">Cuatro familias de tarea. Si lo que tienes entre manos no cae en ninguna, probablemente la IA no sea la herramienta.</p>
+    <div class="families">
+      <div class="family"><h3>Escribir</h3><p>Proyectos, memorias, justificaciones, informes.</p></div>
+      <div class="family"><h3>Leer y analizar</h3><p>Bases de convocatoria, encuestas, entrevistas.</p></div>
+      <div class="family"><h3>Preparar materiales</h3><p>Formación, lectura fácil, comunicación.</p></div>
+      <div class="family"><h3>Organizar</h3><p>Actas, resúmenes, planificación.</p></div>
+    </div>
+    <p class="aside">Ninguna de las cuatro sustituye el criterio profesional. Todas le hacen sitio.</p>
+  </section>
+
+  <hr class="rule">
+
+  <section id="casos">
+    <h2>Los tres casos</h2>
+    <p class="lede">Hechos sobre documentos públicos reales, así que se pueden repetir con los mismos ficheros. Cada uno enlaza a la conversación completa, sin cortes.</p>
+
+    <article class="caso">
+      <span class="tag">Caso 1 · Captación de financiación</span>
+      <h3>De la convocatoria al borrador</h3>
+      <div class="body">
+        <ol class="steps">
+          <li>Subes las bases de la convocatoria</li>
+          <li>Extraes los criterios y su peso</li>
+          <li>Generas el índice, un apartado por criterio</li>
+          <li>De ahí sale el marco lógico</li>
+        </ol>
+        <p class="pull"><strong>El error más común</strong> es pedir «escríbeme un proyecto». Lo que funciona es «ajústalo a estos criterios de valoración y dime qué me falta para puntuar alto».</p>
+        <p>El momento interesante de la demo: las bases reparten un 75 % al proyecto y lo desglosan en cinco subcriterios, pero no asignan puntos a cada uno. Muchos modelos se inventan un reparto verosímil. Por eso el prompt lleva la regla antifabulación y pide la página de cada dato.</p>
+        <p class="links">
+          <a href="https://claude.ai/share/d3b28d9b-a49a-4da9-a44a-462b1b8d646b">Ver la conversación completa</a>
+          <a href="https://fundacionlacaixa.org/documents/d/guest/convocatoria-social-cooperacion-internacional-2026-bases-pdf">Bases de la convocatoria (PDF)</a>
+          <a href="#demo1">Los prompts exactos</a>
+        </p>
+      </div>
+    </article>
+
+    <article class="caso">
+      <span class="tag">Caso 2 · Análisis de información</span>
+      <h3>Escuchar a doscientas personas en diez minutos</h3>
+      <div class="body">
+        <p>Doscientas siete respuestas abiertas de un cuestionario convertidas en categorías temáticas que salen de los propios datos, con el recuento de cada una, las citas literales que la sostienen y una tabla lista para pegar en la memoria.</p>
+        <p class="pull"><strong>La regla que no se salta:</strong> coge veinte respuestas al azar y comprueba que están bien clasificadas. Si fallan, cambia el prompt, no los datos.</p>
+        <p>Sirve igual para entrevistas transcritas, actas de asamblea o mensajes del equipo de campo.</p>
+        <p class="links">
+          <a href="https://claude.ai/share/6115b846-ab1e-4496-a99b-c987c9cec24a">Ver la conversación completa</a>
+          <a href="#datos">El dataset, aquí abajo</a>
+          <a href="#demo3">Los prompts exactos</a>
+        </p>
+      </div>
+    </article>
+
+    <article class="caso">
+      <span class="tag">Caso 3 · Materiales y comunicación</span>
+      <h3>Un contenido, muchas versiones</h3>
+      <div class="body">
+        <p>De una memoria anual salen tres cosas distintas: una adaptación a lectura fácil dirigida a las personas de las que habla el documento, un guión de taller de noventa minutos para voluntariado y un hilo de cinco piezas para redes.</p>
+        <p class="pull"><strong>El hallazgo de la demo:</strong> la memoria da 13,6 millones de niños alcanzados en emergencias en un sitio y 37,8 millones atendidos en otro. Miden cosas distintas, pero conviven en el mismo documento sin explicarlo. Pedirle al modelo que señale las contradicciones en vez de armonizarlas lo convierte en un detector de incoherencias de tus propios documentos.</p>
+        <p class="links">
+          <a href="https://claude.ai/share/e1e7d2c3-f68a-4974-babd-3760f89e3fd1">Ver la conversación completa</a>
+          <a href="https://www.savethechildren.es/sites/default/files/2026-07/MemoriaAnual2025_0.pdf">Memoria Anual 2025 (PDF)</a>
+          <a href="#demo5">Los prompts exactos</a>
+        </p>
+      </div>
+    </article>
+  </section>
+
+  <hr class="rule">
+
+  <section id="formula">
+    <h2>Anatomía de un prompt que funciona</h2>
+    <p class="lede">Los dieciséis prompts de esta página están construidos con las mismas seis piezas. Si escribes los tuyos, comprueba que no te falte ninguna.</p>
+    <ol class="pieces">
+      <li><h3>Rol</h3><p>Desde qué oficio quieres que te responda: técnico de proyectos, analista, evaluador.</p></li>
+      <li><h3>Contexto</h3><p>Quiénes sois, con quién trabajáis, en qué territorio y con qué medios.</p></li>
+      <li><h3>Tarea</h3><p>Una sola, concreta y verificable. Dos tareas en un prompt salen peor que dos prompts.</p></li>
+      <li><h3>Formato</h3><p>Tabla, extensión máxima, apartados. Si no lo pides, te lo inventa.</p></li>
+      <li><h3>Criterios</h3><p>Qué hace que la respuesta sea buena, y qué no quieres ver en ella.</p></li>
+      <li><h3>Tu material</h3><p>Documentos, datos, textos previos. La pieza que más cambia el resultado.</p></li>
+    </ol>
+    <p class="aside">La sexta es la que marca la diferencia. Sin tu material, la respuesta es genérica y se nota.</p>
+    <div class="prose" style="margin-top:1.75rem">
+      <p><strong>Dos frases que puedes añadir a cualquier prompt.</strong> «Antes de responder, hazme las preguntas que necesites» convierte un monólogo en una conversación. «Dame un borrador, no un resultado final» te deja tres versiones entre las que elegir, y criticar es más rápido que escribir desde cero.</p>
+    </div>
+  </section>
+
+  <hr class="rule">
+
+  <section id="kit">
+    <h2>Kit de prompts</h2>
+    <p class="lede">Diez plantillas. Sustituye lo que va entre corchetes por los datos reales de tu entidad y adjunta tus documentos siempre que puedas. Cada caja se copia con un clic.</p>
+
+    <h3 class="bloque">Financiación y formulación de proyectos</h3>
+
+    <div class="prompt">
+      <div class="prompt-head">
+        <div><span class="num">Prompt 1</span><h3>Radiografía de una convocatoria</h3><p class="when">Cuando se publican las bases y hay que decidir rápido si os presentáis.</p></div>
+        <button class="copy" type="button">Copiar</button>
+      </div>
+<pre>Actúa como técnico o técnica de formulación de proyectos con diez años de
+experiencia en entidades sociales. Te adjunto las bases de la convocatoria
+[NOMBRE Y ORGANISMO].
+
+Tarea. Devuélveme una tabla con:
+1. Cada criterio de valoración y su puntuación máxima.
+2. Qué evidencia concreta pide para otorgar esa puntuación.
+3. Requisitos excluyentes: si nos falta alguno, quedamos fuera.
+4. Plazos, formato y límite de extensión de cada documento.
+
+Después, en un apartado aparte:
+- Los tres criterios que más pesan en la nota final.
+- Qué información necesitas de nosotros que no esté en las bases.
+
+No inventes nada. Si algo no aparece en el documento, escribe "no consta
+en las bases".</pre>
+      <p class="tip"><b>Consejo.</b> Este es el prompt que hay que ejecutar siempre primero. El resto del kit se apoya en la tabla de criterios que devuelve.</p>
+    </div>
+
+    <div class="prompt">
+      <div class="prompt-head">
+        <div><span class="num">Prompt 2</span><h3>El índice alineado con quien puntúa</h3><p class="when">Antes de escribir una sola línea del proyecto.</p></div>
+        <button class="copy" type="button">Copiar</button>
+      </div>
+<pre>Contexto. Somos [ENTIDAD], dedicada a [QUÉ HACÉIS] en [TERRITORIO].
+Trabajamos con [COLECTIVO], somos un equipo de [N] personas y nuestro
+presupuesto anual ronda los [IMPORTE].
+
+Te adjunto: (a) la tabla de criterios de valoración del paso anterior y
+(b) [MEMORIA ANUAL O PROYECTO SIMILAR YA PRESENTADO].
+
+Tarea. Propón el índice del proyecto con un apartado por cada criterio de
+valoración. Para cada apartado indica:
+- Qué hay que contar y en cuántas palabras.
+- Qué dato o evidencia nuestra debería sostenerlo.
+- Qué tenemos ya y qué nos falta conseguir.
+
+Antes de escribir el índice, hazme las preguntas que necesites para no dar
+nada por supuesto.</pre>
+      <p class="tip"><b>Consejo.</b> El error más común es pedir «escríbeme un proyecto». Lo que sube la nota es ajustar la estructura a cómo os van a puntuar.</p>
+    </div>
+
+    <div class="prompt">
+      <div class="prompt-head">
+        <div><span class="num">Prompt 3</span><h3>Marco lógico e indicadores realistas</h3><p class="when">Cuando el formulario pide indicadores y no queréis prometer lo que no podréis demostrar.</p></div>
+        <button class="copy" type="button">Copiar</button>
+      </div>
+<pre>A partir del proyecto que estamos formulando, construye una matriz de marco
+lógico: objetivo general, objetivos específicos, resultados esperados,
+actividades, indicadores y fuentes de verificación.
+
+Condiciones:
+- Cada indicador debe poder medirse con los medios de una entidad pequeña.
+  Nada que exija una evaluación externa cara.
+- Para cada indicador, indica quién lo recoge, con qué instrumento y cada
+  cuánto tiempo.
+- Distingue los indicadores de proceso (¿lo hicimos?) de los de resultado
+  (¿cambió algo en la vida de las personas?).
+- Señala expresamente los indicadores que no vamos a poder demostrar con
+  nuestros recursos y propón alternativas más modestas.</pre>
+      <p class="tip"><b>Consejo.</b> Revisa que ningún indicador exija datos personales que no podéis recoger legalmente. Es un fallo caro que reaparece después, en la justificación.</p>
+    </div>
+
+    <div class="prompt">
+      <div class="prompt-head">
+        <div><span class="num">Prompt 4</span><h3>El evaluador implacable</h3><p class="when">Con el borrador terminado y tiempo todavía para corregirlo.</p></div>
+        <button class="copy" type="button">Copiar</button>
+      </div>
+<pre>Vas a hacer de persona evaluadora de la convocatoria [NOMBRE], no de asesora
+nuestra. Tu trabajo es puntuar, no animarnos.
+
+Te adjunto: (a) los criterios de valoración con su puntuación y (b) nuestro
+borrador.
+
+Tarea:
+1. Puntúa cada criterio y justifica la nota en una sola frase.
+2. Señala las tres frases más flojas del borrador y explica por qué.
+3. Marca toda afirmación que no esté respaldada por un dato.
+4. Termina con los cinco cambios que más subirían la puntuación, ordenados
+   por impacto.
+
+Sé duro. Si este proyecto no llegaría al corte, dilo con claridad.</pre>
+      <p class="tip"><b>Consejo.</b> Funciona mucho mejor que pedir «mejora este texto». Al cambiar el rol, deja de complacerte y empieza a encontrar agujeros.</p>
+    </div>
+
+    <h3 class="bloque">Analizar la información que ya tenéis</h3>
+
+    <div class="prompt">
+      <div class="prompt-head">
+        <div><span class="num">Prompt 5</span><h3>Respuestas abiertas de un cuestionario</h3><p class="when">Cuando se acumulan respuestas sin analizar y nadie encuentra el hueco para hacerlo.</p></div>
+        <button class="copy" type="button">Copiar</button>
+      </div>
+<pre>Actúa como analista cualitativo o cualitativa. Te adjunto [N] respuestas a la
+pregunta abierta "[PREGUNTA]", recogidas entre [PERSONAS PARTICIPANTES EN EL
+PROGRAMA X].
+
+Tarea:
+1. Propón entre cinco y ocho categorías que emerjan de las propias
+   respuestas. No uses categorías predefinidas.
+2. Define cada categoría en una frase.
+3. Asigna cada respuesta a una sola categoría, citando su número.
+4. Dame el recuento por categoría y dos citas literales representativas
+   de cada una.
+5. Aparta las respuestas ambiguas o que no encajen en ninguna categoría.
+
+No interpretes más allá de lo que dicen las respuestas. Si alguna es
+ininteligible, márcala como tal en vez de forzarla en una categoría.</pre>
+      <p class="tip"><b>La regla que no se salta.</b> Coge veinte respuestas al azar y comprueba a mano que están bien clasificadas. Si fallan, cambia el prompt, nunca los datos.</p>
+    </div>
+
+    <div class="prompt">
+      <div class="prompt-head">
+        <div><span class="num">Prompt 6</span><h3>El acta que sí sirve para algo</h3><p class="when">Después de cualquier reunión de equipo, junta o comisión.</p></div>
+        <button class="copy" type="button">Copiar</button>
+      </div>
+<pre>Te paso la transcripción de una reunión de [EQUIPO / JUNTA / COMISIÓN]
+del [FECHA].
+
+Devuélveme, en este orden y en un máximo de una página:
+1. Decisiones tomadas. Solo lo que se decidió, no lo que se debatió.
+2. Tareas: qué, quién y para cuándo. Si no se asignó responsable o fecha,
+   escribe "sin asignar".
+3. Temas que quedaron abiertos.
+4. Discrepancias relevantes que convenga dejar registradas.
+
+No incluyas nada que no aparezca en la transcripción.</pre>
+      <p class="tip"><b>Consejo.</b> El punto 2 es el que cambia las reuniones. «Sin asignar» escrito en negro sobre blanco obliga a asignar.</p>
+    </div>
+
+    <h3 class="bloque">Materiales y comunicación</h3>
+
+    <div class="prompt">
+      <div class="prompt-head">
+        <div><span class="num">Prompt 7</span><h3>Adaptación a lectura fácil</h3><p class="when">Siempre que un texto vaya dirigido a las personas de las que habla, y no solo al financiador.</p></div>
+        <button class="copy" type="button">Copiar</button>
+      </div>
+<pre>Adapta el siguiente texto a lectura fácil, dirigido a [personas con
+discapacidad intelectual / con bajo nivel de alfabetización / que están
+aprendiendo español].
+
+Reglas:
+- Frases de menos de quince palabras, una idea por frase.
+- Vocabulario cotidiano. Si un término técnico es imprescindible,
+  explícalo la primera vez que aparezca.
+- Voz activa y orden sujeto, verbo, complemento.
+- Sin metáforas, sin siglas sin explicar y sin cifras complejas:
+  escribe "casi la mitad" en lugar de "el 47,3 %".
+- Estructura con títulos cortos y listas.
+
+Al final, enumera los términos que has sustituido, por si alguno era
+jurídicamente necesario y hay que recuperarlo.</pre>
+      <p class="tip"><b>Aviso.</b> La lectura fácil se valida con personas destinatarias y tiene sello de calidad. La IA acelera el borrador; no sustituye la validación.</p>
+    </div>
+
+    <div class="prompt">
+      <div class="prompt-head">
+        <div><span class="num">Prompt 8</span><h3>Guión de una sesión formativa</h3><p class="when">Para formar a voluntariado o al propio equipo sin dedicarle una semana.</p></div>
+        <button class="copy" type="button">Copiar</button>
+      </div>
+<pre>Diseña el guión de una sesión formativa de [90] minutos sobre [TEMA],
+dirigida a [voluntariado / equipo técnico / familias], con [N] participantes
+y un nivel de partida [bajo / medio / alto].
+
+Formato: tabla con minutaje, actividad, objetivo de aprendizaje, materiales
+y quién conduce.
+
+Condiciones:
+- Nunca más de quince minutos seguidos de exposición.
+- Al menos dos actividades participativas y una de cierre que permita
+  comprobar qué se ha aprendido.
+- Materiales realistas: papelógrafo y fotocopias, no plataformas de pago.
+- Incluye tres preguntas para arrancar el debate y qué hacer si el grupo
+  no participa.</pre>
+      <p class="tip"><b>Consejo.</b> Pídele después que te genere la hoja de evaluación de la sesión. Son dos minutos y os ahorra la discusión de si funcionó o no.</p>
+    </div>
+
+    <div class="prompt">
+      <div class="prompt-head">
+        <div><span class="num">Prompt 9</span><h3>De la memoria anual a las redes</h3><p class="when">Cuando el documento en el que tanto trabajasteis lo han leído seis personas.</p></div>
+        <button class="copy" type="button">Copiar</button>
+      </div>
+<pre>Te adjunto nuestra memoria anual [AÑO].
+
+Tarea. Extrae los cinco datos o historias con más potencial comunicativo y
+conviértelos en cinco publicaciones para [LinkedIn / Instagram / X].
+
+Para cada una:
+- Primera línea con el dato o la frase que hace parar el scroll.
+- Cuerpo de tres o cuatro frases, sin jerga del sector.
+- Una llamada a la acción concreta.
+
+Reglas:
+- Ninguna cifra puede inventarse ni redondearse al alza.
+- Cita entre corchetes la página de la memoria de la que sale cada dato,
+  para que podamos verificarlo antes de publicar.
+- Nada de lenguaje paternalista ni compasivo sobre las personas de las
+  que hablamos: son protagonistas, no casos.</pre>
+      <p class="tip"><b>Consejo.</b> La última regla es la que más veces hay que repetir. Los modelos tienden por defecto al tono caritativo de los años noventa.</p>
+    </div>
+
+    <h3 class="bloque">Gestión interna</h3>
+
+    <div class="prompt">
+      <div class="prompt-head">
+        <div><span class="num">Prompt 10</span><h3>Vuestra política de uso de IA, en una página</h3><p class="when">Antes de que cada persona del equipo acabe improvisando por su cuenta.</p></div>
+        <button class="copy" type="button">Copiar</button>
+      </div>
+<pre>Ayúdame a redactar la política de uso de inteligencia artificial de
+[ENTIDAD], en una sola página y en lenguaje claro.
+
+Contexto. Somos [N] personas, trabajamos con [COLECTIVO] y manejamos
+[TIPO DE DATOS]. Estamos sujetos a [NORMATIVA DE PROTECCIÓN DE DATOS
+APLICABLE].
+
+Debe cubrir:
+1. Qué usos están permitidos y cuáles no.
+2. Qué información no se introduce nunca en una herramienta de IA.
+3. Quién revisa antes de publicar o de enviar algo a un financiador.
+4. Cómo se informa a las personas destinatarias.
+5. Qué hacer cuando un uso de IA provoca un error.
+
+Hazme primero las preguntas que necesites. Redáctalo para que lo entienda
+todo el equipo, no solo la dirección.</pre>
+      <p class="tip"><b>Consejo.</b> Una página que todo el mundo lee vale más que un protocolo de veinte que nadie abre. Ponedle fecha de revisión.</p>
+    </div>
+
+    <p class="prose" style="margin-top:2rem">El kit completo, maquetado y editable, está en <a href="materiales/Kit-prompts-sector-social.docx">formato Word</a>, y en <a href="https://github.com/javicanton/ia-sector-social/blob/main/kit-de-prompts.md">Markdown</a> si prefieres leerlo en el repositorio.</p>
+  </section>
+
+  <hr class="rule">
+
+  <section id="demos">
+    <h2>Guión de demos</h2>
+    <p class="lede">Los seis prompts de las tres demos, con el desglose de por qué cada uno está escrito así y qué debe salir. El material va adjunto, nunca pegado dentro del prompt: si pegas un documento largo en el cuadro de texto, se mezcla con tus instrucciones y el modelo pierde de vista qué es orden y qué es dato.</p>
+
+    <h3 class="bloque" id="demo1">Caso 1 · De la convocatoria al borrador</h3>
+    <p class="prose" style="margin-bottom:1.5rem">Dos prompts encadenados en la misma conversación, sobre las bases de la Convocatoria de Cooperación Internacional 2026 de la Fundación ”la Caixa”. El segundo usa la tabla que devuelve el primero. <a href="https://claude.ai/share/d3b28d9b-a49a-4da9-a44a-462b1b8d646b">Ver el resultado</a>.</p>
+
+    <div class="prompt">
+      <div class="prompt-head">
+        <div><span class="num">Demo · prompt 1</span><h3>Radiografía de las bases</h3><p class="when">Adjunta el PDF de las bases: <a href="https://fundacionlacaixa.org/documents/d/guest/convocatoria-social-cooperacion-internacional-2026-bases-pdf">descargar</a></p></div>
+        <button class="copy" type="button">Copiar</button>
+      </div>
+<pre>Actúa como técnico de formulación de proyectos de una ONGD pequeña, con
+experiencia en convocatorias de fundaciones privadas. Te adjunto las bases
+completas de la Convocatoria de Cooperación Internacional 2026 de la
+Fundación "la Caixa".
+
+Tarea 1. Devuélveme una tabla con los criterios de valoración y su peso
+exacto. Una fila por criterio y, en la última columna, la página de las
+bases en la que aparece.
+
+Tarea 2. Debajo, la lista de requisitos excluyentes: los que, si no los
+cumplimos, nos dejan fuera antes de que nadie evalúe el proyecto.
+
+Tarea 3. Los límites económicos y de calendario: importe máximo, duración
+máxima, porcentaje máximo sobre el coste total del proyecto y fechas.
+
+Reglas:
+- No inventes ponderaciones. Si las bases dan un porcentaje para un bloque
+  pero no para los subcriterios que contiene, dilo expresamente en lugar
+  de repartirlo tú.
+- Cita la página de cada dato.
+- Si algo de lo que te pido no aparece, escribe "no consta en las bases".</pre>
+      <details>
+        <summary>Cómo está construido y qué debe salir</summary>
+        <div class="det-body">
+          <ul>
+            <li>El rol incluye «ONGD pequeña» porque cambia lo que el modelo destaca: una entidad grande no necesita que le adviertan de los límites de facturación.</li>
+            <li>Las tres tareas van separadas y numeradas porque responden a tres decisiones distintas: si podemos presentarnos, cuánto podemos pedir y cómo nos van a puntuar.</li>
+            <li>La regla sobre las ponderaciones no es genérica: está escrita para este documento, porque aquí es exactamente donde el modelo se inventa cosas.</li>
+            <li>La columna de página convierte la tabla en algo verificable.</li>
+          </ul>
+          <p>Los pesos reales son tres: entidad gestora 15 %, socio local 10 % y proyecto presentado 75 %. Entre los excluyentes, ejecutar en un único país, presentar un solo proyecto por entidad, disponer de socio local con sede en el país, tres años de antigüedad, ingresos anuales por debajo de dos millones de euros y no ser entidad académica. Los límites: hasta 50.000 euros, dieciocho meses y un máximo del 75 % del coste total.</p>
+        </div>
+      </details>
+    </div>
+
+    <div class="prompt">
+      <div class="prompt-head">
+        <div><span class="num">Demo · prompt 2</span><h3>El índice alineado con quien puntúa</h3><p class="when">Nada nuevo que adjuntar. Va en la misma conversación, justo después del anterior.</p></div>
+        <button class="copy" type="button">Copiar</button>
+      </div>
+<pre>Contexto. Somos una fundación de apoyo educativo a adolescentes en riesgo de
+abandono escolar. Queremos presentar un proyecto en Ecuador, con un socio
+local con sede en Quito con el que llevamos seis años trabajando. Somos ocho
+personas contratadas y nuestro presupuesto anual es de 420.000 euros.
+Pediríamos 50.000 euros a dieciocho meses. El proyecto encaja en el ámbito de
+educación y formación, en la línea de becas para la continuidad educativa y
+mentoría comunitaria.
+
+Tarea. Con la tabla de criterios del paso anterior, propón el índice de la
+solicitud. Para cada apartado dime:
+- A qué criterio de valoración responde y cuánto pesa.
+- Qué hay que contar y en cuántas palabras.
+- Qué evidencia nuestra debería sostenerlo.
+- Una pregunta que tengamos que respondernos antes de escribirlo.
+
+Las bases definen cuatro herramientas de innovación social: escucha,
+cocreación, prototipado y escalado. Dime en qué apartado del índice debe
+aparecer cada una y con qué nivel de detalle.
+
+Comprueba también si nuestras cifras encajan con lo que las bases consideran
+favorable y avísame si algo no cuadra.
+
+Antes de escribir el índice, hazme las preguntas que necesites.</pre>
+      <details>
+        <summary>Cómo está construido y qué debe salir</summary>
+        <div class="det-body">
+          <ul>
+            <li>El contexto lleva números concretos —ocho personas, 420.000 euros, seis años— porque son justo los datos con los que las bases deciden si somos elegibles.</li>
+            <li>El índice se pide criterio a criterio, no por capítulos temáticos. Ese es el giro que sube la nota.</li>
+            <li>La pregunta pendiente en cada apartado convierte el índice en un plan de trabajo.</li>
+            <li>Los cuatro conceptos de innovación social se citan por su nombre porque son el vocabulario propio de esta convocatoria. Un proyecto que no los usa se lee como escrito para otra.</li>
+          </ul>
+          <p>Con 50.000 euros solicitados, las bases consideran favorable no superar el 60 % del coste total, lo que sitúa el proyecto por encima de unos 83.000 euros. Un buen resultado detecta eso solo, y avisa de que el 25 % restante lo aporta la entidad o un cofinanciador, nunca las personas destinatarias.</p>
+        </div>
+      </details>
+    </div>
+
+    <h3 class="bloque" id="demo3">Caso 2 · Escuchar a doscientas personas</h3>
+    <p class="prose" style="margin-bottom:1.5rem">Sobre el CSV de respuestas del cuestionario, que puedes <a href="datos/respuestas-cuestionario-programa-educativo.csv">descargar aquí</a> y ver <a href="#datos">más abajo</a>. Los datos son ficticios. <a href="https://claude.ai/share/6115b846-ab1e-4496-a99b-c987c9cec24a">Ver el resultado</a>.</p>
+
+    <div class="prompt">
+      <div class="prompt-head">
+        <div><span class="num">Demo · prompt 3</span><h3>Categorización de respuestas abiertas</h3><p class="when">Adjunta el CSV con las 207 respuestas.</p></div>
+        <button class="copy" type="button">Copiar</button>
+      </div>
+<pre>Actúa como analista cualitativo. Te adjunto un CSV con 207 respuestas a la
+pregunta abierta "¿Qué es lo que más te ha aportado el programa y qué
+cambiarías?", recogidas entre adolescentes participantes en un programa de
+apoyo educativo. Las columnas son: id, sede, edad, meses_en_programa y
+respuesta.
+
+Tarea:
+1. Propón entre cinco y ocho categorías que emerjan de las propias
+   respuestas. No uses categorías predefinidas. Muchas respuestas dicen a
+   la vez algo que valoran y algo que cambiarían: clasifícalas por el tema
+   del que hablan, no por si son positivas o negativas.
+2. Define cada categoría en una frase.
+3. Asigna cada respuesta a una sola categoría, citando su id.
+4. Dame el recuento por categoría y dos citas literales de cada una, con
+   su id.
+5. Aparta en una lista final las respuestas sin contenido, las
+   ininteligibles y las que estén en otro idioma. No las fuerces dentro de
+   ninguna categoría.
+
+No interpretes más allá de lo que dicen las respuestas. Si alguna incluye un
+dato personal identificable, señálamelo en lugar de reproducirlo.</pre>
+      <details>
+        <summary>Cómo está construido y qué debe salir</summary>
+        <div class="det-body">
+          <ul>
+            <li>«Que emerjan de las propias respuestas» es la instrucción metodológica clave. Sin ella el modelo aplica las categorías de manual de cualquier evaluación de programas y deja de escuchar a los datos.</li>
+            <li>La aclaración sobre respuestas mixtas evita el error más frecuente: acabar con dos categorías, «positivo» y «negativo», que no sirven para tomar ninguna decisión.</li>
+            <li>«Una sola categoría» y «citando su id» permiten verificar. Sin id, todo el ejercicio es un acto de fe.</li>
+            <li>El punto 5 obliga a declarar lo que no encaja en vez de repartirlo para que los números queden redondos.</li>
+          </ul>
+          <p>Deberían emerger categorías cercanas a estas ocho: apoyo académico, vínculo con la persona tutora, confianza y autoestima, horarios y frecuencia, instalaciones y materiales, grupo de iguales, orientación de futuro y comunicación con las familias.</p>
+        </div>
+      </details>
+    </div>
+
+    <div class="prompt">
+      <div class="prompt-head">
+        <div><span class="num">Demo · prompt 4</span><h3>Cruce y verificación</h3><p class="when">Justo después del anterior, en la misma conversación.</p></div>
+        <button class="copy" type="button">Copiar</button>
+      </div>
+<pre>Ahora dos cosas más:
+
+1. Cruza las categorías con la columna sede y dime si alguna preocupación
+   se concentra claramente en una sede. Si las diferencias son pequeñas,
+   dilo en lugar de forzar una conclusión.
+2. Elige veinte respuestas al azar y muéstrame, en una tabla, su id, su
+   texto completo y la categoría que le asignaste, para que yo pueda
+   comprobar a mano si la clasificación es correcta.</pre>
+      <details>
+        <summary>Cómo está construido y qué debe salir</summary>
+        <div class="det-body">
+          <ul>
+            <li>El punto 1 lleva incorporado el freno estadístico. Sin él, cualquier diferencia se presenta como un hallazgo, y con doscientas respuestas repartidas en cinco sedes casi ninguna lo es.</li>
+            <li>El punto 2 es la regla de verificación convertida en instrucción. Que la muestra la genere el propio modelo hace que el paso cueste diez segundos, y por eso se hace.</li>
+          </ul>
+          <p>En las veinte de verificación suele aparecer al menos una mal clasificada, casi siempre una respuesta mixta que menciona dos temas. Localízala y enséñala: es la parte más útil de la demo.</p>
+        </div>
+      </details>
+    </div>
+
+    <h3 class="bloque" id="demo5">Caso 3 · Un contenido, muchas versiones</h3>
+    <p class="prose" style="margin-bottom:1.5rem">Sobre la Memoria Anual 2025 de Save the Children España. <a href="https://claude.ai/share/e1e7d2c3-f68a-4974-babd-3760f89e3fd1">Ver el resultado</a>.</p>
+
+    <div class="prompt">
+      <div class="prompt-head">
+        <div><span class="num">Demo · prompt 5</span><h3>Adaptación a lectura fácil</h3><p class="when">Adjunta la memoria: <a href="https://www.savethechildren.es/sites/default/files/2026-07/MemoriaAnual2025_0.pdf">descargar</a></p></div>
+        <button class="copy" type="button">Copiar</button>
+      </div>
+<pre>Te adjunto la Memoria Anual 2025 de Save the Children España.
+
+Tarea. Adapta a lectura fácil la sección "Nuestros programas en España",
+para que puedan leerla los propios adolescentes que participan en esos
+programas.
+
+Reglas:
+- Frases de menos de quince palabras, una idea por frase.
+- Vocabulario cotidiano. Si un término es imprescindible, explícalo la
+  primera vez que aparezca.
+- Sin siglas sin explicar y sin cifras en formato complejo.
+- Títulos cortos y listas.
+- Habla de las personas como protagonistas, nunca como beneficiarias
+  pasivas de una ayuda.
+
+Al final, enumera los términos que has sustituido, por si alguno era
+institucionalmente necesario y hay que recuperarlo.</pre>
+      <details>
+        <summary>Cómo está construido</summary>
+        <div class="det-body">
+          <ul>
+            <li>Se nombra la sección exacta. Pedir «adapta la memoria» sobre un documento entero devuelve un resumen, no una adaptación.</li>
+            <li>Se nombra a quién va dirigido, y son los propios adolescentes. El destinatario cambia el registro más que cualquier regla de estilo.</li>
+            <li>La lista de términos sustituidos es el control de calidad: a veces se pierde algo que jurídica o institucionalmente tenía que estar.</li>
+          </ul>
+        </div>
+      </details>
+    </div>
+
+    <div class="prompt">
+      <div class="prompt-head">
+        <div><span class="num">Demo · prompt 6</span><h3>De la memoria a LinkedIn</h3><p class="when">Sobre la misma memoria, en la misma conversación.</p></div>
+        <button class="copy" type="button">Copiar</button>
+      </div>
+<pre>De la misma memoria, extrae los cinco datos o historias con más potencial
+comunicativo y conviértelos en cinco publicaciones para LinkedIn.
+
+Para cada una:
+- Primera línea con el dato o la frase que hace parar el scroll.
+- Cuerpo de tres o cuatro frases, sin jerga del sector.
+- Una llamada a la acción concreta.
+
+Reglas:
+- Ninguna cifra puede inventarse ni redondearse al alza.
+- Detrás de cada cifra, indica entre corchetes la página de la memoria de
+  la que sale.
+- Si dos partes de la memoria dan cifras distintas sobre lo mismo,
+  señálamelo en lugar de elegir una por tu cuenta.
+- Nada de lenguaje paternalista ni compasivo sobre las personas de las
+  que hablamos: son protagonistas, no casos.
+- Si alguna historia identifica a un menor por su nombre, avísame antes de
+  usarla.</pre>
+      <details>
+        <summary>Cómo está construido y qué debe salir</summary>
+        <div class="det-body">
+          <ul>
+            <li>La página entre corchetes permite que alguien de comunicación publique sin haberse leído las cuarenta páginas, y siga respondiendo de cada cifra.</li>
+            <li>La regla sobre cifras contradictorias está puesta a propósito para este documento. Da resultado.</li>
+          </ul>
+          <p>Hay material de sobra: 113 respuestas a emergencias, 15.021 niños y niñas atendidos en España, 5.500 profesionales formados en prevención de violencia y un 67 % del gasto destinado directamente a programas. Y tres historias personales, que son las que de verdad funcionan en redes.</p>
+        </div>
+      </details>
+    </div>
+
+    <p class="prose">El guión completo, con todo el desglose, está en <a href="materiales/Guion-demos-prompts.docx">Word</a> y en <a href="https://github.com/javicanton/ia-sector-social/blob/main/guion-de-demos.md">Markdown</a>.</p>
+  </section>
+
+  <hr class="rule">
+
+  <section id="datos">
+    <h2>Los datos del caso 2</h2>
+    <p class="lede">Doscientas siete respuestas a la pregunta «¿Qué es lo que más te ha aportado el programa y qué cambiarías?». <strong>Los datos son ficticios</strong>: se generaron para esta demostración y no corresponden a ninguna persona, entidad ni programa real. Úsalos libremente para practicar o para formar a tu equipo.</p>
+    <div class="tablewrap"><table id="csv"><thead><tr><th>id</th><th>sede</th><th>edad</th><th>meses</th><th>respuesta</th></tr></thead><tbody><tr><td colspan="5" style="padding:1.2rem;color:#63767B">Cargando el fichero…</td></tr></tbody></table></div>
+    <div class="tablebar">
+      <button id="more" type="button" hidden>Ver las 207</button>
+      <span id="count"></span>
+      <a href="datos/respuestas-cuestionario-programa-educativo.csv" download>Descargar el CSV</a>
+    </div>
+    <div class="prose" style="margin-top:1.5rem">
+      <p>El fichero incorpora ruido a propósito, porque uno limpio no enseña nada: doce respuestas de menos de quince caracteres, dos escritas en inglés y dos que nombran a una persona tutora. Esas dos últimas son las que activan la instrucción de señalar datos identificables en lugar de reproducirlos, así que son el sitio por donde empezar a mirar cuando la demo termine.</p>
+    </div>
+  </section>
+
+  <hr class="rule">
+
+  <section id="presentacion">
+    <h2>La presentación</h2>
+    <p class="lede">Las doce diapositivas del taller. Dentro del PDF, los tres casos llevan su enlace pinchable.</p>
+    <div class="pdfbox">
+      <iframe src="materiales/presentacion.pdf#view=FitH" title="Presentación del taller, 12 diapositivas"></iframe>
+      <div class="nopdf">
+        <p>Tu navegador no muestra el PDF aquí dentro.</p>
+        <p><a href="materiales/presentacion.pdf">Abrir la presentación</a> · <a href="https://github.com/javicanton/ia-sector-social/blob/main/presentacion.md">Leerla como texto</a></p>
+      </div>
+    </div>
+    <p class="prose" style="margin-top:1rem"><a href="materiales/presentacion.pdf">Abrir en una pestaña</a> · <a href="https://github.com/javicanton/ia-sector-social/blob/main/presentacion.md">Versión en texto</a>, buscable, traducible y compatible con lector de pantalla.</p>
+  </section>
+
+  <hr class="rule">
+
+  <section id="etica">
+    <h2>Tres líneas que no se cruzan</h2>
+    <p class="lede">Valen para los diez prompts del kit y para cualquier otro que escribas.</p>
+    <div class="lines">
+      <div class="line">
+        <h3>Datos sensibles, fuera</h3>
+        <p>Expedientes, datos de menores, información de salud o de situación administrativa y migratoria no entran nunca en una herramienta de IA de uso general. Anonimiza antes: sustituye nombres por códigos y elimina cualquier dato que permita identificar a una persona.</p>
+      </div>
+      <div class="line">
+        <h3>Sobre personas, decide una persona</h3>
+        <p>Ninguna adjudicación de ayuda, selección de participantes, priorización o triaje se automatiza. La IA prepara información para que alguien decida; no decide. Esto no es solo una cuestión ética: en muchos ordenamientos es además una obligación legal.</p>
+      </div>
+      <div class="line">
+        <h3>Lo que firmas, lo verificas</h3>
+        <p>Si el texto lleva el logo de vuestra entidad, respondéis vosotros de cada cifra, cada cita y cada referencia que contiene. Los modelos inventan datos con total aplomo, y lo hacen sobre todo en lo que más se parece a un dato: porcentajes, fechas, nombres de normas y bibliografía.</p>
+      </div>
+    </div>
+  </section>
+
+  <hr class="rule">
+
+  <section id="descargas">
+    <h2>Descargas</h2>
+    <p class="lede">Todo se publica bajo <a href="https://creativecommons.org/licenses/by/4.0/deed.es">CC BY 4.0</a>: puedes copiarlo, adaptarlo, traducirlo y usarlo en tu entidad, incluso comercialmente, citando la autoría.</p>
+    <ul class="files">
+      <li><a class="name" href="materiales/Kit-prompts-sector-social.docx">Kit de prompts</a> <span class="ext">docx</span> <span class="desc">Las diez plantillas, maquetadas y editables. El documento para repartir dentro de una entidad.</span></li>
+      <li><a class="name" href="materiales/Guion-demos-prompts.docx">Guión de demos</a> <span class="ext">docx</span> <span class="desc">Los seis prompts con su desglose completo, qué debe salir y dónde suele fallar.</span></li>
+      <li><a class="name" href="materiales/presentacion.pdf">Presentación</a> <span class="ext">pdf</span> <span class="desc">Las doce diapositivas del taller, con los enlaces a los casos dentro.</span></li>
+      <li><a class="name" href="datos/respuestas-cuestionario-programa-educativo.csv">Dataset del caso 2</a> <span class="ext">csv</span> <span class="desc">207 respuestas ficticias con ruido deliberado, listas para practicar.</span></li>
+      <li><a class="name" href="https://github.com/javicanton/ia-sector-social">Repositorio completo</a> <span class="ext">git</span> <span class="desc">Todo lo anterior más las versiones en Markdown, el historial y la licencia.</span></li>
+    </ul>
+  </section>
+
+  </main>
+</div>
+
+<footer>
+  <div class="foot-in">
+    <div>
+      <h2>Tres cosas para empezar</h2>
+      <p>Cronometra la tarea repetitiva que más detestes, antes y después. Escribe vuestra política de uso con el prompt 10, que se hace en una tarde. Y prueba los prompts 1 a 4 con una convocatoria real, no con un ejemplo de juguete.</p>
+    </div>
+    <div>
+      <h2>Javier Cantón</h2>
+      <p>UNIR · <a href="https://javiercanton.com">javiercanton.com</a><br>
+      <a href="mailto:javier.canton@unir.net">javier.canton@unir.net</a></p>
+      <p style="margin-top:1rem">Si adaptas estos materiales para tu entidad o los traduces, cuéntamelo. Me interesa saber qué funciona en contextos distintos al mío.</p>
+    </div>
+  </div>
+</footer>
+
+<script>
+// Copiar prompts
+function legacyCopy(pre){
+  var ok = false;
+  try {
+    var r = document.createRange(); r.selectNodeContents(pre);
+    var s = window.getSelection(); s.removeAllRanges(); s.addRange(r);
+    ok = document.execCommand("copy");
+    s.removeAllRanges();
+  } catch(e){}
+  return ok;
+}
+document.querySelectorAll(".copy").forEach(function(btn){
+  btn.addEventListener("click", function(){
+    var pre = btn.closest(".prompt").querySelector("pre");
+    var done = function(){
+      btn.textContent = "Copiado";
+      btn.dataset.done = "1";
+      setTimeout(function(){ btn.textContent = "Copiar"; delete btn.dataset.done; }, 1800);
+    };
+    var failed = function(){
+      if (legacyCopy(pre)) { done(); return; }
+      btn.textContent = "Selecciónalo y cópialo";
+      setTimeout(function(){ btn.textContent = "Copiar"; }, 2600);
+    };
+    if (navigator.clipboard && window.isSecureContext) {
+      navigator.clipboard.writeText(pre.textContent).then(done, failed);
+    } else {
+      failed();
+    }
+  });
+});
+
+// Índice lateral: marcar la sección visible
+var secs = document.querySelectorAll("main section[id]");
+var navLinks = {};
+document.querySelectorAll(".rail a").forEach(function(a){ navLinks[a.getAttribute("href").slice(1)] = a; });
+if ("IntersectionObserver" in window) {
+  var io = new IntersectionObserver(function(entries){
+    entries.forEach(function(e){
+      var a = navLinks[e.target.id];
+      if (a && e.isIntersecting) {
+        Object.values(navLinks).forEach(function(x){ x.removeAttribute("aria-current"); });
+        a.setAttribute("aria-current", "true");
+      }
+    });
+  }, { rootMargin: "-10% 0px -75% 0px" });
+  secs.forEach(function(s){ io.observe(s); });
+}
+
+// Tabla del CSV
+(function(){
+  var table = document.querySelector("#csv tbody");
+  var more = document.getElementById("more");
+  var count = document.getElementById("count");
+  function parse(text){
+    var rows = [], row = [], field = "", q = false;
+    for (var i = 0; i < text.length; i++) {
+      var c = text[i];
+      if (q) {
+        if (c === '"') { if (text[i+1] === '"') { field += '"'; i++; } else { q = false; } }
+        else field += c;
+      } else if (c === '"') q = true;
+      else if (c === ",") { row.push(field); field = ""; }
+      else if (c === "\n") { row.push(field); rows.push(row); row = []; field = ""; }
+      else if (c !== "\r") field += c;
+    }
+    if (field.length || row.length) { row.push(field); rows.push(row); }
+    return rows.filter(function(r){ return r.length > 1; });
+  }
+  function render(rows, limit){
+    table.innerHTML = "";
+    rows.slice(1, limit).forEach(function(r){
+      var tr = document.createElement("tr");
+      r.forEach(function(cell){ var td = document.createElement("td"); td.textContent = cell; tr.appendChild(td); });
+      table.appendChild(tr);
+    });
+  }
+  fetch("datos/respuestas-cuestionario-programa-educativo.csv")
+    .then(function(r){ if (!r.ok) throw new Error(r.status); return r.text(); })
+    .then(function(t){
+      var rows = parse(t);
+      var total = rows.length - 1;
+      render(rows, 13);
+      count.textContent = "Mostrando 12 de " + total + " respuestas";
+      more.hidden = false;
+      more.addEventListener("click", function(){
+        render(rows, rows.length);
+        count.textContent = total + " respuestas";
+        more.hidden = true;
+      });
+    })
+    .catch(function(){
+      table.innerHTML = '<tr><td colspan="5" style="padding:1.2rem">No se ha podido cargar la vista previa. <a href="datos/respuestas-cuestionario-programa-educativo.csv">Descarga el CSV</a> para verlo completo.</td></tr>';
+    });
+})();
+</script>
+</body>
+</html>

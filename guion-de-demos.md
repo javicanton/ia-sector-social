@@ -1,6 +1,6 @@
 # Guión de demos
 
-Siete prompts sobre tres documentos reales, con la explicación de por qué cada uno está escrito así.
+Seis prompts sobre tres documentos reales, con la explicación de por qué cada uno está escrito así.
 
 *Javier Cantón · UNIR*
 
@@ -22,7 +22,7 @@ Siete prompts sobre tres documentos reales, con la explicación de por qué cada
 
 ## Por qué estos prompts están escritos así
 
-Los siete prompts siguen la misma estructura de seis piezas.
+Los seis prompts siguen la misma estructura de seis piezas.
 
 ### Las seis piezas
 
