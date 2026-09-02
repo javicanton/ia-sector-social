@@ -1,21 +1,49 @@
-MIT License
+Creative Commons Attribution 4.0 International (CC BY 4.0)
 
 Copyright (c) 2026 Javier Cantón
 
-Permission is hereby granted, free of charge, to any person obtaining a copy
-of this software and associated documentation files (the "Software"), to deal
-in the Software without restriction, including without limitation the rights
-to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
-copies of the Software, and to permit persons to whom the Software is
-furnished to do so, subject to the following conditions:
+Los materiales de este repositorio —el kit de prompts, el guión de demos, la
+presentación, el dataset ficticio y los textos que los acompañan— se publican
+bajo la licencia Creative Commons Atribución 4.0 Internacional.
 
-The above copyright notice and this permission notice shall be included in all
-copies or substantial portions of the Software.
+Eres libre de:
 
-THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
-IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
-FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
-AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
-LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
-OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
-SOFTWARE.
+  COMPARTIR — copiar y redistribuir el material en cualquier medio o formato.
+  ADAPTAR — remezclar, transformar y construir a partir del material para
+  cualquier finalidad, incluso comercial.
+
+Bajo la siguiente condición:
+
+  ATRIBUCIÓN — Debes reconocer adecuadamente la autoría, proporcionar un
+  enlace a la licencia e indicar si se han realizado cambios. Puedes hacerlo
+  de cualquier manera razonable, pero no de una manera que sugiera que quien
+  licencia te respalda a ti o al uso que haces del material.
+
+No hay restricciones adicionales: no puedes aplicar términos legales ni
+medidas tecnológicas que restrinjan legalmente a otras personas hacer
+cualquier uso permitido por la licencia.
+
+Atribución sugerida:
+
+  Cantón, J. (2026). Cómo usar la IA para el sector social: kit de prompts y
+  casos. Foro UNIR. Publicado bajo CC BY 4.0.
+
+Texto legal completo de la licencia:
+https://creativecommons.org/licenses/by/4.0/legalcode.es
+
+Resumen legible:
+https://creativecommons.org/licenses/by/4.0/deed.es
+
+--------------------------------------------------------------------------
+
+EXCEPCIONES
+
+Esta licencia cubre únicamente los materiales de autoría propia contenidos en
+este repositorio. No cubre:
+
+- Las bases de la Convocatoria de Cooperación Internacional 2026 de la
+  Fundación "la Caixa" ni la Memoria Anual 2025 de Save the Children España,
+  que son documentos públicos de sus respectivas organizaciones, no se
+  redistribuyen aquí y conservan todos sus derechos.
+- Las marcas, logotipos y nombres comerciales de UNIR y de cualquier otra
+  entidad mencionada, que no se licencian bajo estos términos.
